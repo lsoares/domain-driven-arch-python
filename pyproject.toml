@@ -7,6 +7,8 @@ authors = ["Luís Soares <lsoares@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 fastapi = "^0.70.0"
+pytest = "^6.2.5"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 

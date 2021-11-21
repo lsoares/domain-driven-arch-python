@@ -1,9 +1,10 @@
 # Domain-driven Architecture in Python
 
 ## Why?
-Check the [Kotlin version](https://github.com/lsoares/clean-architecture-sample).
+
+Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-sample).
 
 ## Commands
-```shell
-uvicorn main:app
-```
+- Setup: get [Poetry](https://python-poetry.org) and `poetry install`
+- Run app: `uvicorn main:app`
+- Run tests: `pytest`
