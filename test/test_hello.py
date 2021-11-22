@@ -1,9 +1,11 @@
 from starlette.testclient import TestClient
 
-from main import app
+from adapters.UserRepositoryInMemory import UserRepositoryInMemory
+from web.main import WebApp
 
 
 def test_create_a_user():
+    app = WebApp(user_repository=UserRepositoryInMemory())
     client = TestClient(app)
 
     response = _create_user(client, "luis.s@gmail.com", "Luís Soares", "password")

@@ -6,5 +6,5 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
 
 ## Commands
 - Setup: get [Poetry](https://python-poetry.org) and `poetry install`
-- Run app: `uvicorn main:app`
+- Run app: `uvicorn web.main:app`
 - Run tests: `pytest`
