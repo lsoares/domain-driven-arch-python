@@ -17,6 +17,7 @@ class CreateUser:
         password: str
 
     async def handle(self, user: CreateRepresenter):
+        # TODO: create use case
         self.user_repository.save(User(
             id=str(datetime.date.today()),
             email=user.email, name=user.name,

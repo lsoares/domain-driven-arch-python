@@ -5,6 +5,7 @@ from domain.User import User
 
 
 class UserRepository(ABC):
+
     @abstractmethod
     def find_all(self) -> List[User]:
         pass
