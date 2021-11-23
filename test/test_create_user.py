@@ -15,7 +15,7 @@ def test_create_a_user():
     ]
 
 
-def _create_user(client, email, name, password):
+def _create_user(client, email: str, name: str, password: str):
     return client.post(
         url="/users",
         json={"email": email, "name": name, "password": password}

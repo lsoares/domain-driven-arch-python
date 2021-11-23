@@ -26,5 +26,20 @@ def test_cant_create_repeated_user():
 ```
 2 - let's allow deleting a user:
 ```python
+def test_delete_a_user():
+    client = TestClient(WebApp(user_repository=UserRepositoryInMemory()))
+    _create_user(client, "luis.s@gmail.com", "Luís Soares", "password")
+    _create_user(client, "miguel.s@gmail.com", "Miguel Soares", "password")
+
+    response = _delete_user(client, "luis.s@gmail.com")
+    
+    assert response.status_code == 204
+    assert _list_users(client).json() == [
+        {"name": "Miguel Soares", "email": "miguel.s@gmail.com"}
+    ]
+    
+
+def _delete_user(client, email: str):
+    return client.delete(url=f"/users/{email}")
 
 ```
