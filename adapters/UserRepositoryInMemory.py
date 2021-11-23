@@ -5,10 +5,10 @@ from domain.UserRepository import UserRepository
 
 
 class UserRepositoryInMemory(UserRepository):
-    store: List[User] = []
+    _store: List[User] = []
 
     def find_all(self) -> List[User]:
-        return self.store.copy()
+        return self._store.copy()
 
     def save(self, user: User):
-        self.store.append(user)
+        self._store.append(user)
