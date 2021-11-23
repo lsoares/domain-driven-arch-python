@@ -16,8 +16,3 @@ class CreateUser:
             name=name,
             password=password,
         ))
-
-
-@dataclass
-class EmailAlreadyExists(Exception):
-    pass
