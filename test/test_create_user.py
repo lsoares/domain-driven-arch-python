@@ -7,11 +7,11 @@ from web.main import WebApp
 def test_create_a_user():
     client = TestClient(WebApp(user_repository=UserRepositoryInMemory()))
 
-    response = _create_user(client, "luis.s@gmail.com", "Luís Soares", "password")
+    response = _create_user(client, "jake.jackson@fbi.gov", "Jake Jackson", "password")
 
     assert response.status_code == 201
     assert _list_users(client).json() == [
-        {"name": "Luís Soares", "email": "luis.s@gmail.com"}
+        {"name": "Jake Jackson", "email": "jake.jackson@fbi.gov"}
     ]
 
 
