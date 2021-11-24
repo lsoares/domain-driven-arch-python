@@ -11,7 +11,10 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
 
 
 ## Challenge
-1. Let's prevent repeated emails:
+1. The Grinch has secretly broken the code and the tests are not passing...
+2. Why do we need a serializer `CreateRepresenter` in `CreateUserHandler`? And a deserializer in `ListUsersHandler`?
+3. Why do we need a DTO in `domain/CreateUser`?
+4. Let's prevent repeated emails:
     ```python
     def test_cant_create_repeated_user():
         client = TestClient(WebApp(user_repository=UserRepositoryInMemory()))
@@ -24,10 +27,9 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
             {"name": "Luís Soares", "email": "luis.s@gmail.com"}
         ]
     ```
-2. Why do we need a mapper in `ListUsersHandler`? Why do we need a DTO in `CreateUser` use case?
-3. What would you do to create/use an alternative `UserRepository`?
-4. Why do we need a `UserRepository` interface?
-5. Let's allow deleting a user:
+5. Why do we need a `UserRepository` interface?
+6. What would you do to create/use an alternative `UserRepository`?
+7. Let's allow deleting a user:
     ```python
     def test_delete_a_user():
         client = TestClient(WebApp(user_repository=UserRepositoryInMemory()))
@@ -44,9 +46,9 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
     def _delete_user(client, email: str):
         return client.delete(url=f"/users/{email}")
     ```
-6. Why do we only test "as a user"? Don't we create domain tests? What's the trade-off?
-7. Can you list what the domain contains?
-8. What does a port mean? What does it contain?
-9. Why is `web` outside of `adapters`? Where would you put a CLI or a worker/job?
-10. Why is `main.py` under `web`?
-11. Let's create a DSL for test usage
+8. Why do we only test "as a user"? Don't we create domain tests? What's the trade-off?
+9. Can you list what the domain contains?
+10. What does a port mean? What does it contain?
+11. Why is `web` outside of `adapters`? Where would you put a CLI or a worker/job?
+12. Why is `main.py` under `web`?
+13. Let's create a DSL for test usage

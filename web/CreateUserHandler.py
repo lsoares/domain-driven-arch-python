@@ -21,4 +21,4 @@ class CreateUserHandler:
             name=user.name,
             password=user.password,
         )
-        return JSONResponse(status_code=201)
+        return JSONResponse(status_code=200)
