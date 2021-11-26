@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from starlette.responses import JSONResponse
 
 from domain.CreateUser import CreateUser
+from domain.UserRepository import EmailAlreadyExists
 
 
 @dataclass
@@ -16,9 +17,12 @@ class CreateUserHandler:
         password: str
 
     async def handle(self, user: CreateRepresenter):
-        self.create_user.invoke(
-            email=user.email,
-            name=user.name,
-            password=user.password,
-        )
-        return JSONResponse(status_code=200)
+        try:
+            self.create_user.invoke(
+                email=user.email,
+                name=user.name,
+                password=user.password,
+            )
+            return JSONResponse(status_code=201)
+        except EmailAlreadyExists:
+            return JSONResponse(status_code=409)

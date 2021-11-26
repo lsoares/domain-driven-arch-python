@@ -9,6 +9,6 @@ class ListUsersHandler:
 
     async def handle(self):
         return JSONResponse(content=list(map(
-            lambda u: {"name": u.email, "email": u.name},
+            lambda u: {"name": u.name, "email": u.email},
             self.list_users.invoke()
         )))
