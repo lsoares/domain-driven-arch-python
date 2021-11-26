@@ -9,5 +9,5 @@ from domain.UserRepository import UserRepository
 class ListUsers:
     user_repository: UserRepository
 
-    def invoke(self) -> List[User]:
+    def __call__(self) -> List[User]:
         return self.user_repository.find_all()

@@ -7,5 +7,5 @@ from domain import UserRepository
 class DeleteUser:
     user_repository: UserRepository
 
-    def invoke(self, email: str):
+    def __call__(self, email: str):
         self.user_repository.delete(email)

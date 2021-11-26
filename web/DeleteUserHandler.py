@@ -9,6 +9,6 @@ from domain import DeleteUser
 class DeleteUserHandler:
     delete_user: DeleteUser
 
-    async def handle(self, email: str):
-        self.delete_user.invoke(email)
+    def __call__(self, email: str):
+        self.delete_user(email)
         return JSONResponse(status_code=204)
