@@ -16,9 +16,9 @@ class CreateUserHandler:
         name: str
         password: str
 
-    async def handle(self, user: CreateRepresenter):
+    def __call__(self, user: CreateRepresenter):
         try:
-            self.create_user.invoke(
+            self.create_user(
                 email=user.email,
                 name=user.name,
                 password=user.password,

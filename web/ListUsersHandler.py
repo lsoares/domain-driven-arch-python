@@ -7,8 +7,8 @@ from domain import ListUsers
 class ListUsersHandler:
     list_users: ListUsers
 
-    async def handle(self):
+    def __call__(self):
         return JSONResponse(content=list(map(
             lambda u: {"name": u.name, "email": u.email},
-            self.list_users.invoke()
+            self.list_users()
         )))

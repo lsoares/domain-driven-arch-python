@@ -9,7 +9,7 @@ from domain.User import User
 class CreateUser:
     user_repository: UserRepository
 
-    def invoke(self, email: str, name: str, password: str):
+    def __call__(self, email: str, name: str, password: str):
         self.user_repository.save(User(
             id=str(datetime.date.today()),
             email=email,
