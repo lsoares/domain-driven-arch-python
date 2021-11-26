@@ -15,12 +15,13 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
 ## Commands
 
 - Run app: `uvicorn web.main:app`
-- Run tests: `pytest`
+- Run tests: `poetry run pytest`
 
 ## Challenge
 
 1. The Grinch has secretly broken the code and the tests are not passing...
-2. What are the uses cases, entities and ports? What are the primary adapters? And secondary?
+2. What are the uses cases, entities and ports? What are the primary adapters? And secondary? use cases: createuser,
+   listusers entities: user ports: userrepository primary a: web secondary adapters: userrepoinmem
 3. Let's prevent repeated emails. Here's the test:
     ```python
     def test_cant_create_repeated_user():
@@ -34,9 +35,11 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
             {"name": "Jake Jackson", "email": "jake.jackson@fbi.gov"}
         ]
     ```
-4. What does a port mean? What does it contain?
+4. What does a port mean? What does it contain? A port is an abstraction of a secondary repository. it contains its
+   interface, DTOs (request/response models) and possible errors.
 5. What's the advantage of the `UserRepository` port? What would you do to create and use an alternative
-   to `UserRepositoryInMemory`?
+   to `UserRepositoryInMemory`? Abstracting the way we do User CRUD. We could create another implementation like
+   UserRepoDatabase and inject it in main.py.
 6. Let's allow deleting a user. Here's the test:
     ```python
     def test_delete_a_user():
@@ -54,10 +57,19 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
     def _delete_user(client, email: str):
         return client.delete(url=f"/users/{email}")
     ```
-7. Why do we only test "as a user"? Don't we create domain tests? What's the trade-off?
-8. Where would you put a CLI or a worker/job?
-9. Why is `main.py` under `web`?
+7. Why do we only test "as a user"? Don't we create domain tests? What's the trade-off? To be more realistic; to avoid
+   testing implementation details; to ease refactoring; to document the codebase abilities. The trade-off is that we
+   loose a bit a pinpointing ability. Tests may be slower. We may need to do variations hitting the domain directly
+   though.
+8. Where would you put a CLI or a worker/job? In the root. Although they're adapters, they're primary adapters (i.e.
+   entrypoints). That means they're the reason this app exists; therefore it's ok to give them highlight in the root
+   folder.
+9. Why is `main.py` under `web`? Because it's the booting and DI of the web app primary adapter (entrypoint). Other
+   primary adapters would have their own booting/DI.
 10. What are the upsides/downsides of having a use-case orientation? (separating use cases per file in the web and the
     domain)
+    More files but more clarity on the abilities of the app. Less code sharing which good so that features become
+    modular. It makes dependencies much more clear because each feature only has what it needs. Finally, less code
+    hotspots.
 11. Let's create a DSL for test usage
     (suggestion: create an `ApiClient` class and pass it the HTTP client)

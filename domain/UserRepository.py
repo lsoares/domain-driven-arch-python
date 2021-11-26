@@ -13,3 +13,11 @@ class UserRepository(ABC):
     @abstractmethod
     def save(self, user: User):
         pass
+
+    @abstractmethod
+    def delete(self, email: str):
+        pass
+
+
+class EmailAlreadyExists(Exception):
+    pass
