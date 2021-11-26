@@ -35,12 +35,13 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
             {"name": "Jake Jackson", "email": "jake.jackson@fbi.gov"}
         ]
     ```
-4. What does a port mean? What does it contain? A port is an abstraction of a secondary repository. it contains its
+4. Where did you write the error class and why?
+5. What does a port mean? What does it contain? A port is an abstraction of a secondary repository. it contains its
    interface, DTOs (request/response models) and possible errors.
-5. What's the advantage of the `UserRepository` port? What would you do to create and use an alternative
+6. What's the advantage of the `UserRepository` port? What would you do to create and use an alternative
    to `UserRepositoryInMemory`? Abstracting the way we do User CRUD. We could create another implementation like
    UserRepoDatabase and inject it in main.py.
-6. Let's allow deleting a user. Here's the test:
+7. Let's allow deleting a user. Here's the test:
     ```python
     def test_delete_a_user():
         client = TestClient(WebApp(user_repository=UserRepositoryInMemory()))
@@ -57,19 +58,19 @@ Check the [Kotlin version readme](https://github.com/lsoares/clean-architecture-
     def _delete_user(client, email: str):
         return client.delete(url=f"/users/{email}")
     ```
-7. Why do we only test "as a user"? Don't we create domain tests? What's the trade-off? To be more realistic; to avoid
+8. Why do we only test "as a user"? Don't we create domain tests? What's the trade-off? To be more realistic; to avoid
    testing implementation details; to ease refactoring; to document the codebase abilities. The trade-off is that we
    loose a bit a pinpointing ability. Tests may be slower. We may need to do variations hitting the domain directly
    though.
-8. Where would you put a CLI or a worker/job? In the root. Although they're adapters, they're primary adapters (i.e.
+9. Where would you put a CLI or a worker/job? In the root. Although they're adapters, they're primary adapters (i.e.
    entrypoints). That means they're the reason this app exists; therefore it's ok to give them highlight in the root
    folder.
-9. Why is `main.py` under `web`? Because it's the booting and DI of the web app primary adapter (entrypoint). Other
-   primary adapters would have their own booting/DI.
-10. What are the upsides/downsides of having a use-case orientation? (separating use cases per file in the web and the
+10. Why is `main.py` under `web`? Because it's the booting and DI of the web app primary adapter (entrypoint). Other
+    primary adapters would have their own booting/DI.
+11. What are the upsides/downsides of having a use-case orientation? (separating use cases per file in the web and the
     domain)
     More files but more clarity on the abilities of the app. Less code sharing which good so that features become
     modular. It makes dependencies much more clear because each feature only has what it needs. Finally, less code
     hotspots.
-11. Let's create a DSL for test usage
+12. Let's create a DSL for test usage
     (suggestion: create an `ApiClient` class and pass it the HTTP client)

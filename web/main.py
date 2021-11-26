@@ -18,15 +18,15 @@ class WebApp(FastAPI):
 
         self.add_api_route(
             path="/users", methods=['POST'],
-            endpoint=CreateUserHandler(create_user=CreateUser(user_repository)),
+            endpoint=CreateUserHandler(CreateUser(user_repository)),
         )
         self.add_api_route(
             path="/users", methods=['GET'],
-            endpoint=ListUsersHandler(list_users=ListUsers(user_repository)),
+            endpoint=ListUsersHandler(ListUsers(user_repository)),
         )
         self.add_api_route(
             path="/users/{email}", methods=['DELETE'],
-            endpoint=DeleteUserHandler(delete_user=DeleteUser(user_repository)),
+            endpoint=DeleteUserHandler(DeleteUser(user_repository)),
         )
 
 

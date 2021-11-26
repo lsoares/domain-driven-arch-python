@@ -1,20 +1,19 @@
-from typing import List
+from typing import List, Dict
 
 from domain.User import User
 from domain.UserRepository import UserRepository, EmailAlreadyExists
 
 
 class UserRepositoryInMemory(UserRepository):
-    _store: List[User] = []
+    _store: Dict[str, User] = {}
 
     def find_all(self) -> List[User]:
-        return self._store.copy()
+        return list(self._store.values()).copy()
 
     def save(self, user: User):
-        for u in self._store:
-            if u.email == user.email:
-                raise EmailAlreadyExists()
-        self._store.append(user)
+        if user.email in self._store.keys():
+            raise EmailAlreadyExists()
+        self._store[user.email] = user
 
     def delete(self, email: str):
-        self._store.remove(next(user for user in self._store if user.email == email))
+        self._store.pop(email)
