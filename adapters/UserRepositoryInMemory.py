@@ -5,7 +5,10 @@ from domain.UserRepository import UserRepository, EmailAlreadyExists
 
 
 class UserRepositoryInMemory(UserRepository):
-    _store: Dict[str, User] = {}
+    _store: Dict[str, User]
+
+    def __init__(self):
+        self._store = {}
 
     def find_all(self) -> List[User]:
         return list(self._store.values()).copy()
